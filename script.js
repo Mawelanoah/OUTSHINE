@@ -17,6 +17,16 @@ if (menuToggle && nav) {
       menuToggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.focus();
+    }
+  });
 }
 
 // Set current year in footer
@@ -25,7 +35,7 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// Optional: slight header background change on scroll
+// Header background on scroll
 const header = document.getElementById('header');
 if (header) {
   window.addEventListener('scroll', () => {
@@ -34,5 +44,5 @@ if (header) {
     } else {
       header.style.background = 'rgba(10,10,10,0.95)';
     }
-  });
+  }, { passive: true });
 }
